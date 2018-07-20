@@ -1,3 +1,6 @@
+MySQL group replication is a new feature and we need cluster health metrics, while standard mysqld_exporter covers most of the use case.
+
+If you want to run in docker, invoke like this.
 
 ```
 docker run \
@@ -7,3 +10,15 @@ docker run \
   -p 5000:5000 \
   hkwi/mysqld_gr_exporter
 ```
+
+Environment variables
+----
+- MYSQL_HOST
+- MYSQL_USER
+- MYSQL_PASSWORD
+
+
+Grafana
+----
+`replication_group_members` will be exported with member states and roles in metric labels.
+This is suitable for table format, which was [added in grafana 4.3](http://docs.grafana.org/guides/whats-new-in-v4-3/#prometheus-table-data-column-per-label).
