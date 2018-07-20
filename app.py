@@ -23,11 +23,11 @@ def metrics():
 		params = {}
 		for r in cur:
 			o = dict(zip(names,r))
-			host = o["MEMBER_HOST"]
-			params["%s.state" % host] = o["MEMBER_STATE"]
-			params["%s.role" % host] = o["MEMBER_ROLE"]
-			params["%s.state.index" % host] = states.index(o["MEMBER_STATE"])
-			params["%s.role.index" % host] = roles.index(o["MEMBER_ROLE"])
+			host = o["MEMBER_HOST"].replace("-","_").replace(".","_")
+			params["%s_state" % host] = o["MEMBER_STATE"]
+			params["%s_role" % host] = o["MEMBER_ROLE"]
+			params["%s_state_index" % host] = states.index(o["MEMBER_STATE"])
+			params["%s_role_index" % host] = roles.index(o["MEMBER_ROLE"])
 		
 		lines += "replication_group_members{%s} %d\r\n" % (
 			", ".join(['%s="%s"' % (k,v) for k,v in params.items()]),
