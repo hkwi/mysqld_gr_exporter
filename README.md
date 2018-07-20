@@ -1,9 +1,9 @@
 
 ```
-docker run -e FLASK_APP=app.py \
-  -e MYSQL_HOST=localhost \
+docker run \
+  -e MYSQL_HOST=dbhost \
   -e MYSQL_USER=test \
   -e MYSQL_PASSWORD=testpassword \
-  -p 8080:8080 \
-  imagename flask run -h 0.0.0.0 -p 8080
+  -p 5000:5000 \
+  hkwi/mysqld_gr_exporter
 ```
