@@ -5,6 +5,8 @@ import contextlib
 
 app = flask.Flask(__name__)
 
+states = "ONLINE OFFLINE RECOVERING ERROR UNREACHABLE".split()
+
 @app.route("/metrics", methods=["GET"])
 def metrics():
 	lines = ""
@@ -17,7 +19,8 @@ def metrics():
 		names = [d[0].lower() for d in cur.description]
 		for r in cur:
 			params = ", ".join(['%s="%s"' % nv for nv in zip(names, r)])
-			lines += "replication_group_members{%s} 1\r\n" % params
+			role = dict(zip(names, r))["member_role"]
+			lines += "replication_group_members{%s} %d\r\n" % (params, states.index(role))
 		
 		return lines
 
