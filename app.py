@@ -19,8 +19,8 @@ def metrics():
 		names = [d[0].lower() for d in cur.description]
 		for r in cur:
 			params = ", ".join(['%s="%s"' % nv for nv in zip(names, r)])
-			role = dict(zip(names, r))["member_role"]
-			lines += "replication_group_members{%s} %d\r\n" % (params, states.index(role))
+			state = dict(zip(names, r))["member_state"]
+			lines += "replication_group_members{%s} %d\r\n" % (params, states.index(state))
 		
 		return lines
 
