@@ -52,5 +52,5 @@ def metrics():
 			for name in names:
 				lines += ['mysql_memory_%s{event="%s"} %d' % (name, r["EVENT_NAME"], r[name])]
 	
-	return "\r\n".join(lines)
+	return "\n".join(lines)
 
